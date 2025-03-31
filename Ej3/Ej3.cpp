@@ -6,44 +6,47 @@ using namespace std;
 // Enteros
 
 int Entero::getEntero() const {
-    return this->entero;
+    return this->entero; // El valor del entero.
 }
 
 shared_ptr<Numero> Entero::operator+(const Numero& other) const {
+    // Intentamos convertir el otro número a Entero
     const Entero* e = dynamic_cast<const Entero*>(&other);
     if (e) {
-        int res = (this->entero + e->getEntero());
+        int res = (this->entero + e->getEntero()); // Suma de dos enteros
         return make_shared<Entero>(res);
     }
+    // Intentamos convertir el otro número a Real
     const Real* r = dynamic_cast<const Real*>(&other);
     if (r) {
-        double res = (this->entero + r->getReal());
+        double res = (this->entero + r->getReal()); // Suma de un entero y un real
         return make_shared<Real>(res);
     }
+    // Intentamos convertir el otro número a Complejo
     const Complejo* c = dynamic_cast<const Complejo*>(&other);
     if (c) {
-        double resR = (this->entero + c->getParteReal());
-        double resI = c->getParteImaginaria();
+        double resR = (this->entero + c->getParteReal()); // Suma de la parte real
+        double resI = c->getParteImaginaria(); // La parte imaginaria queda igual
         return make_shared<Complejo>(resR, resI);
     }
-    return nullptr;
+    return nullptr; // Si no es ninguno de los tipos anteriores, devuelve nullptr
 }
 
 shared_ptr<Numero> Entero::operator-(const Numero& other) const {
     const Entero* e = dynamic_cast<const Entero*>(&other);
     if (e) {
-        int res = (this->entero - e->getEntero());
+        int res = (this->entero - e->getEntero()); // Resta de dos enteros
         return make_shared<Entero>(res);
     }
     const Real* r = dynamic_cast<const Real*>(&other);
     if (r) {
-        double res = (this->entero - r->getReal());
+        double res = (this->entero - r->getReal()); // Resta de un entero y un real
         return make_shared<Real>(res);
     }
     const Complejo* c = dynamic_cast<const Complejo*>(&other);
     if (c) {
-        double resR = (this->entero - c->getParteReal());
-        double resI = -c->getParteImaginaria(); // Corregido: resta la parte imaginaria
+        double resR = (this->entero - c->getParteReal()); // Resta de la parte real
+        double resI = -c->getParteImaginaria(); // Menos la parte imaginaria
         return make_shared<Complejo>(resR, resI);
     }
     return nullptr;
@@ -52,18 +55,18 @@ shared_ptr<Numero> Entero::operator-(const Numero& other) const {
 shared_ptr<Numero> Entero::operator*(const Numero& other) const {
     const Entero* e = dynamic_cast<const Entero*>(&other);
     if (e) {
-        int res = (this->entero * e->getEntero());
+        int res = (this->entero * e->getEntero()); // Multiplicación de dos enteros
         return make_shared<Entero>(res);
     }
     const Real* r = dynamic_cast<const Real*>(&other);
     if (r) {
-        double res = (this->entero * r->getReal());
+        double res = (this->entero * r->getReal()); // Multiplicación de un entero y un real
         return make_shared<Real>(res);
     }
     const Complejo* c = dynamic_cast<const Complejo*>(&other);
     if (c) {
-        double resR = (this->entero * c->getParteReal());
-        double resI = (this->entero * c->getParteImaginaria());
+        double resR = (this->entero * c->getParteReal()); // Multiplicación de la parte real
+        double resI = (this->entero * c->getParteImaginaria()); // Multiplicación de la parte imaginaria
         return make_shared<Complejo>(resR, resI);
     }
     return nullptr;
@@ -72,9 +75,9 @@ shared_ptr<Numero> Entero::operator*(const Numero& other) const {
 shared_ptr<Numero> Entero::operator/(const Numero& other) const {
     const Entero* e = dynamic_cast<const Entero*>(&other);
     if (e) {
-        if (e->getEntero() != 0) {
+        if (e->getEntero() != 0) { // Verificamos que no haya división por cero
             double res = static_cast<double>(this->entero) / e->getEntero();
-            return make_shared<Real>(res);
+            return make_shared<Real>(res); // El resultado puede ser un número real
         } else {
             cout << "Error: División por cero." << endl;
             return nullptr;
@@ -86,7 +89,7 @@ shared_ptr<Numero> Entero::operator/(const Numero& other) const {
             double res = (this->entero / r->getReal());
             return make_shared<Real>(res);
         }
-else {
+        else {
             cout << "Error: División por cero." << endl;
             return nullptr;
         }
@@ -94,9 +97,9 @@ else {
     const Complejo* c = dynamic_cast<const Complejo*>(&other);
     if (c) {
         double denom = c->getParteReal() * c->getParteReal() + c->getParteImaginaria() * c->getParteImaginaria();
-        if (denom != 0) {
-            double resR = (this->entero * c->getParteReal()) / denom;
-            double resI = (-this->entero * c->getParteImaginaria()) / denom;
+        if (denom != 0) { // Verificamos que el denominador no sea cero
+            double resR = (this->entero * c->getParteReal()) / denom; // División de la parte real
+            double resI = (-this->entero * c->getParteImaginaria()) / denom; // División de la parte imaginaria
             return make_shared<Complejo>(resR, resI);
         } else {
             cout << "Error: División por cero." << endl;
@@ -107,31 +110,31 @@ else {
 }
 
 void Entero::toString() const {
-    cout << "Entero: " << entero << endl;
+    cout << "Entero: " << entero << endl; // Imprime el valor del entero
 }
 
 
 // Reales
 
 double Real::getReal() const {
-    return this->real;
+    return this->real; // Devuelve el valor del número real
 }
 
 shared_ptr<Numero> Real::operator+(const Numero& other) const {
     const Entero* e = dynamic_cast<const Entero*>(&other);
     if (e) {
-        double res = (this->real + e->getEntero());
+        double res = (this->real + e->getEntero()); // Suma de un real y un entero
         return make_shared<Real>(res);
     }
     const Real* r = dynamic_cast<const Real*>(&other);
     if (r) {
-        double res = (this->real + r->getReal());
+        double res = (this->real + r->getReal()); // Suma de dos reales
         return make_shared<Real>(res);
     }
     const Complejo* c = dynamic_cast<const Complejo*>(&other);
     if (c) {
-        double res = (this->real + c->getParteReal());
-        return make_shared<Complejo>(res, c->getParteImaginaria());
+        double res = (this->real + c->getParteReal()); // Suma de la parte real
+        return make_shared<Complejo>(res, c->getParteImaginaria()); // La parte imaginaria queda igual
     }
     return nullptr;
 }

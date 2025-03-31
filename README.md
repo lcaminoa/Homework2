@@ -37,6 +37,11 @@ Este ejercicio implementa un sistema de gestión de cursos y estudiantes. Incluy
 El programa utiliza `shared_ptr` para manejar punteros de manera segura y eficiente, evitando leaks de memoria.
 
 **Relación entre clases Estudiante y Curso**  
+La relación entre Curso y Estudiante es de agregación porque:
+- Un Curso "tiene" estudiantes, pero estos pueden existir sin el Curso.
+- Los Estudiantes pueden estar inscritos en múltiples Cursos.
+- Se usa shared_ptr, lo que permite compartir estudiantes entre distintos cursos, por lo que
+la vida de un estudiante no depende de un curso específico.
 
 
 **Archivos:**  
@@ -63,6 +68,7 @@ Esto genera un ejecutable llamado `Ej2`
 
 ### Ejercicio 3
 **Descripción:**  
+Este ejercicio implementa una jerarquía de clases para representar números de diferentes tipos: enteros, reales y complejos. La clase base abstracta `Numero` define las operaciones aritméticas básicas (`+`, `-`, `*`, `/`) y un método para mostrar el número como cadena (`toString`). Las clases derivadas (`Entero`, `Real` y `Complejo`) implementan estas operaciones, permitiendo realizar cálculos entre números de distintos tipos. El programa incluye un menú interactivo para probar las operaciones.
 
 **Archivos:**  
 - `Ej3.cpp`
@@ -84,7 +90,7 @@ Esto genera un ejecutable llamado `Ej3`
 
 ### Ejercicio 4
 **Descripción:**    
-
+Este ejercicio implementa un sistema de cuentas bancarias con herencia. La clase base `CuentaBancaria` define las operaciones comunes, como depositar dinero. Las clases derivadas `CajaDeAhorro` y `CuentaCorriente` implementan versiones específicas, como restricciones en retiros o transferencias entre cuentas. Además, se tiene un menú interactivo para gestionar las cuentas, mostrando información, realizando depósitos, retiros, etc.
 
 **Archivos:**  
 - `Ej4.cpp`
