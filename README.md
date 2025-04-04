@@ -16,7 +16,7 @@ Este ejercicio implementa una clase `Time` que permite trabajar con horas en for
 
 **Cómo compilar:**  
 ```
-g++ -o Ej1 Time.cpp main.cpp
+g++ -o Ej1 time.cpp main.cpp
 ```
 Esto genera un ejecutable llamado `Ej1`
 
